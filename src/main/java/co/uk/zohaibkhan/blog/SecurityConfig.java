@@ -26,10 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-    String encriptedPassword = passwordEncoder().encode(password);
+    String encryptedPassword = passwordEncoder().encode(password);
     auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())
         .withUser(username)
-        .password(encriptedPassword).roles("admin");
+        .password(encryptedPassword).roles("admin");
   }
 
   @Override
