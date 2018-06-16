@@ -1,4 +1,4 @@
-package co.uk.zohaibkhan.blog;
+package co.uk.zohaibkhan.blog.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Value("${spring.admin.password}")
   private String password;
+
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
