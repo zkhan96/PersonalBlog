@@ -6,6 +6,7 @@ import co.uk.zohaibkhan.blog.service.PostService;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,14 +21,12 @@ public class PostServiceImpl implements PostService {
 
   @Override
   public Optional<Post> findForId(Long id) {
-//    return postRepository.findById(id);
-    return Optional.empty();
+    return postRepository.findById(id);
   }
 
   @Override
   public Page<Post> findAllOrderedByDatePageable(int page) {
-//        return postRepository.findAllByOrderByCreateDateDesc(new PageRequest(subtractPageByOne(page), 5));
-    return null;
+    return postRepository.findAllByOrderByCreateDateDesc(PageRequest.of(subtractPageByOne(page),5));
   }
 
   @Override

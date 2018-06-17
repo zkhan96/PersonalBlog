@@ -1,17 +1,26 @@
 package co.uk.zohaibkhan.blog.model;
 
+import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.CreationTimestamp;
 
-//@Table(name = "post")
 @Entity
 public class Post {
 
+  public Post(String title) {
+    this.title = title;
+  }
+
+  public Post() {
+  }
+
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-//  @Column(name = "post_id")
+  @GeneratedValue
   private Long id;
 
 //  @Column(name = "title", nullable = false)
@@ -21,29 +30,28 @@ public class Post {
 //
 //  @Column(name = "body", columnDefinition = "TEXT")
 //  private String body;
-//
-//  @Temporal(TemporalType.TIMESTAMP)
-//  @Column(name = "create_date", nullable = false, updatable = false)
-//  @CreationTimestamp
-//  private Date createDate;
-//
-//
-//  public Long getId() {
-//    return id;
-//  }
-//
-//  public void setId(Long id) {
-//    this.id = id;
-//  }
-//
-//  public String getTitle() {
-//    return title;
-//  }
-//
-//  public void setTitle(String title) {
-//    this.title = title;
-//  }
-//
+
+  @Temporal(TemporalType.TIMESTAMP)
+  @CreationTimestamp
+  private Date createDate;
+
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
 //  public String getBody() {
 //    return body;
 //  }
@@ -59,4 +67,32 @@ public class Post {
 //  public void setCreateDate(Date date) {
 //    this.createDate = date;
 //  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Post post = (Post) o;
+    return Objects.equals(id, post.id) &&
+        Objects.equals(title, post.title);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(id, title);
+  }
+
+  @Override
+  public String toString() {
+    return "Post{" +
+        "id=" + id +
+        ", title='" + title + '\'' +
+        '}';
+  }
 }
