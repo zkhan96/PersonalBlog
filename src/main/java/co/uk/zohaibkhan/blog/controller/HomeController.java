@@ -46,11 +46,12 @@ public class HomeController {
         .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
-  @PostMapping(path = "/post", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public void addPost(@RequestBody String title) {
+  @PostMapping(value = "/post", consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> addPost(@RequestBody String title) {
     Post post = new Post(title);
     postService.save(post);
     LOGGER.debug("Saved post: {}", post);
+    return ResponseEntity.ok(title);
   }
 
   @GetMapping("/admin")
